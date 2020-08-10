@@ -1,5 +1,8 @@
 "use strict";
 
+/**  */
+let recipes = new Map();
+
 
 /** Handle GUI events */
 let handlerGUI = {
