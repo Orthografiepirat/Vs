@@ -31,7 +31,11 @@ class Ingredient{
 /** Handle GUI events */
 /******************** */
 let handlerGUI = {
+    //Interaction via Events in html
+    //
+    
     setVisibleSection : function(whatSection){
+      
         if(whatSection === "createNew"){
             document.getElementById("sectionCreate").style.display = "block";
             document.getElementById("sectionListSingle").style.display = "none";
@@ -43,9 +47,55 @@ let handlerGUI = {
         } else if(whatSection === "displayAll"){
             document.getElementById("sectionCreate").style.display = "none";
             document.getElementById("sectionListSingle").style.display = "none";
-            document.getElementById("sectionListAll").style.display = "block";
+            let sectionElement = document.getElementById("sectionListAll");
+            sectionElement.style.display = "block";
+            let allRecipes = handlerGUI.buildDisplayAllRecipes();
+            sectionElement.appendChild(allRecipes);
         } else{
             alert("Kein gültiger Wert");
+        }
+    },
+    //CRUD
+    //
+    buildCreateRecipe : function(){
+
+    },
+    buildDeleteRecipe : function(){
+
+    },
+    buildUpdateRecipe : function(){
+
+    },
+    buildDisplayRecipe : function(){
+
+    },
+    buildDisplayAllRecipes : function(){
+        let element;
+        let name;
+        let howto;
+        let ingredients;
+        let ingredientsArray;
+        for(let [key, value] of recipeMap){
+            //von hinten erstellen
+            element = htmlElements.article();
+
+            //name
+            name = htmlElements.input(value.name);
+            //howto
+            howto = htmlElements.textarea(value.howto);
+
+            //ingredients
+            ingredients = htmlElements.div();
+            //loop bis alle drin sind
+            for(let entry in value.ingredients){
+              ingredients.appendChild(htmlElements.input(entry));
+            }   
+            
+            //alle erstellten html elemente anhängen
+            element.appendChild(name);
+            element.appendChild(howto);
+            element.appendChild(ingredients);
+            return element;
         }
     }
 }
@@ -54,16 +104,36 @@ let handlerGUI = {
 /*********************** */
 /** Create HTML elements */
 /*********************** */
-
+let htmlElements = {
+    article: function(){
+        let element = document.createElement("article");
+        element.classList.add();
+        return element;
+    },
+    input: function(text){
+        let element = document.createElement("input");
+        element.classList.add();
+        element.value = text;
+        return element;
+    },
+    div: function(){
+        let element = document.createElement("div");
+        element.classList.add();
+        return element;
+    },
+    textarea: function(text){
+        let element = document.createElement("textarea");
+        element.classList.add();
+        element.value = text;
+        return element;
+    }
+}
 
 
 /******************* */
 /** Basic operations */
 /******************* */
 function createRecipe(name, howto, ingredients){
-    let name = name;
-    let howto = howto;
-    let ingredients = ingredients;
     let newRecipe = new Recipe(name, howto, ingredients);
     recipeMap.set(newRecipe.customId, newRecipe);
     console.log("Recipe created: " + newRecipe);
