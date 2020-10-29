@@ -1,0 +1,14 @@
+Course
+
+General
+Create new project
+- use CONSOLE and navigate to folder
+- use COMMAND >> flutter create projectName_xy
+
+
+Basics
+run code on emulator
+- RUN >> run without debugging
+- process represented in DEBUG CONSOLE
+- small panel appears with most used actions
+
