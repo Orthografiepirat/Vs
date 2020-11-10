@@ -12,3 +12,8 @@ run code on emulator
 - process represented in DEBUG CONSOLE
 - small panel appears with most used actions
 
+Variable
+- declared with type
+- initialised with "var" keyword
+- class ohne constructor
+- new instance of class initialised without "new" keyword
